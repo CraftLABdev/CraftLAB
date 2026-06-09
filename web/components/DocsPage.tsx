@@ -103,7 +103,7 @@ export default function DocsPage() {
           </div>
           <div className="ml-auto flex gap-3">
             <Link href="/app" className="btn-primary text-sm">Launch App â†’</Link>
-            <a href="https://t.me/craftlabbot" className="btn-outline text-sm">Telegram Bot</a>
+            <a href="https://t.me/CraftLABisbot" className="btn-outline text-sm">Telegram Bot</a>
           </div>
         </div>
       </div>
@@ -498,7 +498,7 @@ Storage: encrypted ciphertext only (never plaintext)`}</CodeBlock>
             <p className="text-muted mb-6 max-w-sm mx-auto text-sm">Stake SOL, mine $CRAFT, craft rare blueprints. Non-custodial. Open source. Built on Solana.</p>
             <div className="flex justify-center gap-3">
               <Link href="/app" className="btn-primary">Launch App â†’</Link>
-              <a href="https://t.me/craftlabbot" className="btn-outline">Open Telegram Bot</a>
+              <a href="https://t.me/CraftLABisbot" className="btn-outline">Open Telegram Bot</a>
             </div>
           </div>
         </main>

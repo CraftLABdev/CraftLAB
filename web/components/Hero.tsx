@@ -116,7 +116,7 @@ export default function Hero() {
             className="text-sm text-muted mb-12"
           >
             Prefer Telegram?{" "}
-            <a href="https://t.me/craftlabbot" className="underline hover:text-text transition-colors">
+            <a href="https://t.me/CraftLABisbot" className="underline hover:text-text transition-colors">
               Use the bot →
             </a>
           </motion.p>

@@ -7,7 +7,7 @@ const LINKS = [
   { label: "AI Lab",     href: "/#lab"        },
   { label: "App",        href: "/app"         },
   { label: "GitHub",     href: "https://github.com/CraftLAB/CraftLAB" },
-  { label: "Telegram",   href: "https://t.me/craftlabbot" },
+  { label: "Telegram",   href: "https://t.me/CraftLABisbot" },
 ]
 
 export default function Footer() {
