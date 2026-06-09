@@ -1,30 +1,42 @@
 import Link from "next/link"
 
+const LINKS = [
+  { label: "Mine",       href: "/#mine"       },
+  { label: "Craft",      href: "/#craft"      },
+  { label: "Blueprints", href: "/#blueprints" },
+  { label: "AI Lab",     href: "/#lab"        },
+  { label: "App",        href: "/app"         },
+  { label: "GitHub",     href: "https://github.com/CraftLAB/CraftLAB" },
+  { label: "Telegram",   href: "https://t.me/craftlabbot" },
+]
+
 export default function Footer() {
   return (
-    <footer className="border-t border-border py-12 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-3">
-          <div className="pixel-block w-6 h-6" />
-          <span className="font-pixel text-green-DEFAULT text-xs">CraftLAB</span>
-        </div>
-
-        <div className="flex gap-6 text-xs text-muted font-pixel">
-          <Link href="/app" className="hover:text-green-DEFAULT transition-colors">App</Link>
-          <a href="https://github.com/CraftLAB/CraftLAB" target="_blank" rel="noopener" className="hover:text-green-DEFAULT transition-colors">GitHub</a>
-          <a href="https://t.me/craftlabbot" target="_blank" rel="noopener" className="hover:text-green-DEFAULT transition-colors">Telegram</a>
-        </div>
-
-        <div className="font-pixel text-xs text-muted">
-          Built on Solana · MIT License
-        </div>
+    <footer className="border-t border-border">
+      {/* Pixel grass row */}
+      <div className="flex overflow-hidden opacity-30">
+        {Array.from({ length: 60 }).map((_, i) => (
+          <div key={i} className="pixel-block flex-shrink-0" style={{ width: 28, height: 20 }} />
+        ))}
       </div>
 
-      {/* Pixel grass row */}
-      <div className="mt-8 flex overflow-hidden opacity-20">
-        {Array.from({ length: 40 }).map((_, i) => (
-          <div key={i} className="pixel-block flex-shrink-0" style={{ width: 32, height: 22 }} />
-        ))}
+      <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-2.5">
+          <div className="pixel-block w-5 h-5" />
+          <span className="font-pixel text-green-DEFAULT" style={{ fontSize: 9 }}>CraftLAB</span>
+          <span className="text-xs text-muted ml-2">— On-chain crafting on Solana</span>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          {LINKS.map(l => (
+            <Link key={l.label} href={l.href}
+              className="text-sm text-muted hover:text-text transition-colors">
+              {l.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-xs text-light">MIT License · 2025</div>
       </div>
     </footer>
   )

@@ -1,55 +1,51 @@
-"use client"
+﻿"use client"
 import Link from "next/link"
-import { useWallet } from "@solana/wallet-adapter-react"
 import { motion } from "framer-motion"
 
+const LINKS = [
+  { label: "Mine",       href: "/#mine"       },
+  { label: "Craft",      href: "/#craft"      },
+  { label: "Blueprints", href: "/#blueprints" },
+  { label: "AI Lab",     href: "/#lab"        },
+  { label: "Docs",       href: "/docs"        },
+]
+
 export default function Navbar() {
-  const { publicKey, connecting, connected, disconnect, select, wallets } = useWallet()
-
-  const handleConnect = () => {
-    const phantom = wallets.find(w => w.adapter.name === "Phantom")
-    if (phantom) select(phantom.adapter.name)
-  }
-
-  const addr = publicKey ? publicKey.toBase58() : null
-
   return (
-    <motion.nav
-      initial={{ y: -60, opacity: 0 }}
+    <motion.header
+      initial={{ y: -56, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md"
+      transition={{ duration: 0.45 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-bg/90 backdrop-blur-md border-b border-border"
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="pixel-block w-7 h-7" />
-          <span className="font-pixel text-green text-xs tracking-wider">CraftLAB</span>
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-8">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="CraftLAB" width={28} height={28} style={{ width: 28, height: 28, borderRadius: 6 }} />
+          <span className="font-pixel text-green-DEFAULT" style={{ fontSize: 10 }}>CraftLAB</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8 text-sm text-muted">
-          <Link href="/#mine" className="hover:text-green transition-colors">Mine</Link>
-          <Link href="/#craft" className="hover:text-green transition-colors">Craft</Link>
-          <Link href="/#blueprints" className="hover:text-green transition-colors">Blueprints</Link>
-          <Link href="/#lab" className="hover:text-green transition-colors">AI Lab</Link>
-        </div>
+        {/* Nav links */}
+        <nav className="hidden md:flex items-center gap-7">
+          {LINKS.map(l => (
+            <Link key={l.label} href={l.href}
+              className="text-sm text-muted hover:text-text transition-colors font-medium">
+              {l.label}
+            </Link>
+          ))}
+          <span className="pill pill-green text-xs">$CRAFT</span>
+        </nav>
 
-        <div className="flex items-center gap-3">
-          <Link href="/app" className="btn-pixel text-xs hidden sm:inline-block">
+        {/* Actions */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <Link href="/app" className="btn-primary text-sm py-2 px-5">
             Launch App
           </Link>
-          {connecting ? (
-            <span className="text-xs text-muted font-pixel">Connecting…</span>
-          ) : connected && addr ? (
-            <button className="btn-outline-pixel text-xs" onClick={disconnect}>
-              {addr.slice(0,4)}…{addr.slice(-4)}
-            </button>
-          ) : (
-            <button className="btn-outline-pixel text-xs" onClick={handleConnect}>
-              Connect
-            </button>
-          )}
         </div>
       </div>
-    </motion.nav>
+    </motion.header>
   )
 }
+

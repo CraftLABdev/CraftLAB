@@ -1,125 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --bg:       #f7f5ef;
+  --bg2:      #f0ede4;
+  --card:     #ffffff;
+  --border:   #e2ded5;
+  --green:    #16a34a;
+  --green-l:  #22c55e;
+  --green-p:  #dcfce7;
+  --text:     #141410;
+  --muted:    #6b7260;
+  --light:    #a8a89a;
+}
+
 body {
-  background: #050a05;
-  color: #e2f0e2;
+  background: var(--bg);
+  color: var(--text);
   font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Grid background */
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+/* ─── Coin ticker marquee ─── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-/* Pixel block — CSS grass block */
+/* ─── Pixel block (CSS grass block) ─── */
 .pixel-block {
   position: relative;
-  background: #7c4a1a;
-  border: 1px solid #3d2008;
+  background: #8B5E3C;
+  flex-shrink: 0;
 }
 .pixel-block::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 32%;
+  height: 30%;
   background: #4ade80;
-  border-bottom: 2px solid #166534;
 }
 .pixel-block::after {
   content: '';
   position: absolute;
-  top: 32%; left: 0; right: 0;
-  height: 12%;
-  background: #166534;
+  top: 30%; left: 0; right: 0;
+  height: 10%;
+  background: #16a34a;
 }
 
-/* Pixel buttons */
-.btn-pixel {
-  display: inline-block;
-  background: #4ade80;
-  color: #050a05;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  padding: 14px 22px;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  box-shadow: inset -3px -4px 0 #166534, inset 3px 3px 0 #86efac;
-  transition: transform 0.1s;
-  text-decoration: none;
-  letter-spacing: 0.5px;
+/* ─── Pixel border (inset box-shadow trick) ─── */
+.pixel-border {
+  box-shadow:
+    0 0 0 2px var(--text),
+    4px 4px 0 0 var(--text);
 }
-.btn-pixel:hover { transform: translateY(-1px); }
-.btn-pixel:active { transform: translateY(2px); box-shadow: inset 3px 3px 0 #166534; }
+.pixel-border-green {
+  box-shadow:
+    0 0 0 2px var(--green),
+    4px 4px 0 0 var(--green);
+}
 
-.btn-outline-pixel {
-  display: inline-block;
-  background: transparent;
-  color: #4ade80;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  padding: 12px 20px;
-  border: 2px solid #4ade80;
+/* ─── Buttons ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border: 2px solid var(--green);
   cursor: pointer;
   transition: all 0.15s;
   text-decoration: none;
-  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
-.btn-outline-pixel:hover { background: rgba(74,222,128,0.1); }
-
-/* Rarity styles */
-.rarity-common  { color: #9ca3af; border-color: #374151 !important; }
-.rarity-uncommon{ color: #4ade80; border-color: #166534 !important; }
-.rarity-rare    { color: #60a5fa; border-color: #1d4ed8 !important; }
-.rarity-legendary { color: #fbbf24; border-color: #d97706 !important; }
-
-.rarity-common-bg   { background: rgba(156,163,175,0.08); }
-.rarity-uncommon-bg { background: rgba(74,222,128,0.08); }
-.rarity-rare-bg     { background: rgba(96,165,250,0.08); }
-.rarity-legendary-bg{ background: rgba(251,191,36,0.08); }
-
-/* Ingredient colors */
-.ing-CRAFT { background: rgba(74,222,128,0.15); border-color: #166534; }
-.ing-SOL   { background: rgba(96,165,250,0.15); border-color: #1d4ed8; }
-.ing-STONE { background: rgba(156,163,175,0.15); border-color: #4b5563; }
-.ing-GOLD  { background: rgba(251,191,36,0.15);  border-color: #d97706; }
-.ing-MANA  { background: rgba(168,85,247,0.15);  border-color: #7e22ce; }
-
-/* Typewriter cursor */
-.typewriter::after {
-  content: '|';
-  animation: blink 0.8s step-end infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-/* Scanline overlay */
-.scanlines {
-  position: relative;
-  overflow: hidden;
-}
-.scanlines::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 3px,
-    rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px
-  );
-  pointer-events: none;
+.btn-primary:hover {
+  background: #15803d;
+  border-color: #15803d;
+  transform: translateY(-1px);
 }
 
-/* Section fade-in handled by framer */
-.section-divider {
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 28px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  border-color: var(--text);
+  background: var(--bg2);
+}
+
+.btn-pixel-sm {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 10px 16px;
+  background: var(--green);
+  color: #fff;
   border: none;
-  border-top: 1px solid #1a2e1a;
-  margin: 0;
+  cursor: pointer;
+  box-shadow: inset -2px -3px 0 #15803d, inset 2px 2px 0 #4ade80;
+  transition: transform 0.1s;
 }
+.btn-pixel-sm:hover { transform: translateY(-1px); }
+.btn-pixel-sm:active { transform: translateY(1px); box-shadow: inset 2px 2px 0 #15803d; }
+
+/* ─── Pill / badge ─── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  border-radius: 999px;
+}
+.pill-green {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: var(--green);
+}
+
+/* ─── Label pixel ─── */
+.label-pixel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--green);
+}
+
+/* ─── Cards ─── */
+.card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+}
+.card:hover {
+  border-color: #c8c4bb;
+}
+
+/* ─── Rarity ─── */
+.rarity-common   { color: #6b7280; border-color: #d1d5db !important; }
+.rarity-uncommon { color: #16a34a; border-color: #86efac !important; }
+.rarity-rare     { color: #2563eb; border-color: #93c5fd !important; }
+.rarity-legendary{ color: #d97706; border-color: #fcd34d !important; }
+.rarity-common-bg   { background: #f9fafb; }
+.rarity-uncommon-bg { background: #f0fdf4; }
+.rarity-rare-bg     { background: #eff6ff; }
+.rarity-legendary-bg{ background: #fffbeb; }
+
+/* ─── Ingredient cells ─── */
+.ing-CRAFT { background: #f0fdf4; border-color: #86efac; }
+.ing-SOL   { background: #eff6ff; border-color: #93c5fd; }
+.ing-STONE { background: #f9fafb; border-color: #d1d5db; }
+.ing-GOLD  { background: #fffbeb; border-color: #fcd34d; }
+.ing-MANA  { background: #faf5ff; border-color: #d8b4fe; }
+
+/* ─── Dot-grid bg ─── */
+.bg-dots {
+  background-image: radial-gradient(circle, #c8c4bb 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── Section spacing ─── */
+.section { padding: 96px 24px; }
+.section-sm { padding: 64px 24px; }
