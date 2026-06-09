@@ -39,7 +39,7 @@ export default function CTASection() {
             <Link href="/app" className="btn-primary text-base px-8 py-4">
               Launch the app →
             </Link>
-            <a href="https://t.me/craftlabbot" className="btn-outline text-base px-8 py-4">
+            <a href="https://t.me/CraftLABisbot" target="_blank" rel="noopener noreferrer" className="btn-outline text-base px-8 py-4">
               Open Telegram bot
             </a>
           </div>
