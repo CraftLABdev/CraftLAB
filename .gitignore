@@ -1,0 +1,22 @@
+# Node
+node_modules/
+.next/
+dist/
+.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.db
+
+# Env
+.env
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

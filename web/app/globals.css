@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #050a05;
+  color: #e2f0e2;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Pixel block — CSS grass block */
+.pixel-block {
+  position: relative;
+  background: #7c4a1a;
+  border: 1px solid #3d2008;
+}
+.pixel-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 32%;
+  background: #4ade80;
+  border-bottom: 2px solid #166534;
+}
+.pixel-block::after {
+  content: '';
+  position: absolute;
+  top: 32%; left: 0; right: 0;
+  height: 12%;
+  background: #166534;
+}
+
+/* Pixel buttons */
+.btn-pixel {
+  display: inline-block;
+  background: #4ade80;
+  color: #050a05;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 14px 22px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset -3px -4px 0 #166534, inset 3px 3px 0 #86efac;
+  transition: transform 0.1s;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+.btn-pixel:hover { transform: translateY(-1px); }
+.btn-pixel:active { transform: translateY(2px); box-shadow: inset 3px 3px 0 #166534; }
+
+.btn-outline-pixel {
+  display: inline-block;
+  background: transparent;
+  color: #4ade80;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 12px 20px;
+  border: 2px solid #4ade80;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+.btn-outline-pixel:hover { background: rgba(74,222,128,0.1); }
+
+/* Rarity styles */
+.rarity-common  { color: #9ca3af; border-color: #374151 !important; }
+.rarity-uncommon{ color: #4ade80; border-color: #166534 !important; }
+.rarity-rare    { color: #60a5fa; border-color: #1d4ed8 !important; }
+.rarity-legendary { color: #fbbf24; border-color: #d97706 !important; }
+
+.rarity-common-bg   { background: rgba(156,163,175,0.08); }
+.rarity-uncommon-bg { background: rgba(74,222,128,0.08); }
+.rarity-rare-bg     { background: rgba(96,165,250,0.08); }
+.rarity-legendary-bg{ background: rgba(251,191,36,0.08); }
+
+/* Ingredient colors */
+.ing-CRAFT { background: rgba(74,222,128,0.15); border-color: #166534; }
+.ing-SOL   { background: rgba(96,165,250,0.15); border-color: #1d4ed8; }
+.ing-STONE { background: rgba(156,163,175,0.15); border-color: #4b5563; }
+.ing-GOLD  { background: rgba(251,191,36,0.15);  border-color: #d97706; }
+.ing-MANA  { background: rgba(168,85,247,0.15);  border-color: #7e22ce; }
+
+/* Typewriter cursor */
+.typewriter::after {
+  content: '|';
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* Scanline overlay */
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+}
+
+/* Section fade-in handled by framer */
+.section-divider {
+  border: none;
+  border-top: 1px solid #1a2e1a;
+  margin: 0;
+}
