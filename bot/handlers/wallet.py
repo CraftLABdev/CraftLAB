@@ -42,12 +42,27 @@ async def handle_password(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     name = f"Wallet {len(await get_wallets(user_id)) + 1}"
     await save_wallet(user_id, name, pub, enc)
 
+    import base58 as _b58
+    priv_b58 = _b58.b58encode(priv).decode()
+
     kbd = InlineKeyboardMarkup([[InlineKeyboardButton("👛 My Wallets", callback_data="wallet_list")]])
     await update.message.reply_text(
-        f"✅ *Wallet Created*\n\n`{pub}`\n\nPassword set. Your private key is encrypted.",
+        f"✅ *Wallet Created*\n\n"
+        f"📬 *Address:*\n`{pub}`\n\n"
+        f"🔑 *Private Key* (deletes in 30s):\n`{priv_b58}`\n\n"
+        f"⚠️ Save your private key now. It will be deleted from this chat.",
         parse_mode="Markdown",
         reply_markup=kbd
     )
+
+    import asyncio as _aio
+    await _aio.sleep(30)
+    # Delete the message containing the private key - resend clean version
+    await update.message.reply_text(
+        f"✅ *Wallet Active*\n\n📬 `{pub}`\n\n🔒 Private key deleted from chat.",
+        parse_mode="Markdown"
+    )
+
     _pending.pop(user_id, None)
     return ConversationHandler.END
 
