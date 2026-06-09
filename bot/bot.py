@@ -21,7 +21,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
 
-TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+TOKEN = os.getenv("BOT_TOKEN", "")
 
 
 async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
